@@ -13,17 +13,17 @@ public class BallManager : MonoBehaviour
     Vector2 end;                        //position of touch at moment when ball drag
 
     public int power_multiplier = 100;  //strength multiplier of ball push
-
+    public int basket_count = 0;
     
     public static bool is_in_basket;
-    FixedJoint2D ball_fixed_joint;
+    //FixedJoint2D ball_fixed_joint;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         ball = GetComponent<Rigidbody2D>();
-        ball_fixed_joint = gameObject.GetComponent<FixedJoint2D>();
-        ball_fixed_joint.enabled = false;
+        /*ball_fixed_joint = gameObject.GetComponent<FixedJoint2D>();
+        ball_fixed_joint.enabled = false;*/
     }
 
     // Update is called once per frame
@@ -78,8 +78,15 @@ public class BallManager : MonoBehaviour
             ball.simulated = false;
             //ball.MovePosition(collision.gameObject.transform.position);
             //ball.isKinematic=true;
-            //
             is_in_basket = true;
+            CatchBall temp_catch = collision.gameObject.GetComponent<CatchBall>();
+            if (!temp_catch.is_counted)
+            {
+                basket_count++;
+                //temp_catch.is_counted = true;
+                temp_catch.Catch();
+                GameplayUI.instance.ChangeBasketScore(basket_count);
+            }
             //transform.parent=collision.gameObject.transform.parent;
             //collision.gameObject.transform.parent = transform;
 
@@ -89,11 +96,11 @@ public class BallManager : MonoBehaviour
             is_in_basket = false;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("exit " + collision);
         ////is_in_basket = false;
-    }
+    }*/
     /*private void OnTriggerStay2D(Collider2D collision)
     {
         is_in_basket = true;
