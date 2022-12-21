@@ -23,8 +23,6 @@ public class BallManager : MonoBehaviour
     void Start()
     {
         ball = GetComponent<Rigidbody2D>();
-        /*ball_fixed_joint = gameObject.GetComponent<FixedJoint2D>();
-        ball_fixed_joint.enabled = false;*/
     }
 
     // Update is called once per frame
@@ -38,43 +36,20 @@ public class BallManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)&&is_drag)      //check is releaze ball
         {
-            //start = ball.transform.position;
             end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Push();
-            //is_drag = false;
         }
 
         if (is_drag)                        //check is the drag now
         {
-            //start = ball.transform.position;
-            //end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //RotateBasket(start, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //target.z = ball.transform.position.z;
-            //target = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(start.x,start.y,0);
-            //target.z = current_basket.position.z;
-            //current_basket.LookAt(target);
-            //current_basket.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //current_basket.right = target-current_basket.position;
-            //target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //target.z = 0;
-            /*current_basket.LookAt(target);
-            Quaternion temp_rotation= Quaternion.FromToRotation(current_basket.position, current_basket.up);
-            temp_rotation.eulerAngles=new Vector3 (0,0,temp_rotation.eulerAngles.z);
-            current_basket.rotation *= temp_rotation;*/
-            /*Debug.Log("current for " + current_basket.right + " angle " + Vector3.Angle(current_basket.right, Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-            current_basket.Rotate(Vector3.forward, Vector3.Angle(current_basket.up, Camera.main.ScreenToWorldPoint(Input.mousePosition)));*/
             target = -target + current_basket.position;
-            ////target.z = current_basket.position.z;
             RotateBasket(current_basket.up,target);
         }
     }
     private void FixedUpdate()
     {
-        /*if (is_in_basket)
-        {
-            current_basket.rotation = ball.transform.rotation;
-        }*/
+       
     }
     /// <summary>
     /// Push the ball
@@ -83,41 +58,26 @@ public class BallManager : MonoBehaviour
     {
         end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         ball.simulated = true;
-        //ball.isKinematic=false;
-        //ball_fixed_joint.connectedBody = null;
-        //ball_fixed_joint.enabled = false;
-        //transform.DetachChildren();
-        //transform.parent = null;
-        //ball.WakeUp();
         ball.AddForce((end - start) * -power_multiplier);
         is_drag = false;
-        //is_in_basket = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!is_in_basket)
         {
-            Debug.Log("collision" + collision.name);
-            //ball_fixed_joint.enabled = true;
-
+            //Debug.Log("collision" + collision.name);
             ball.transform.position = collision.transform.position;
             ball.simulated = false;
-            //ball.MovePosition(collision.gameObject.transform.position);
-            //ball.isKinematic=true;
             is_in_basket = true;
             current_basket = collision.gameObject.transform.parent.transform;
             CatchBall temp_catch = collision.gameObject.GetComponent<CatchBall>();
             if (!temp_catch.is_counted)
             {
                 basket_count++;
-                //temp_catch.is_counted = true;
                 temp_catch.Catch();
                 GameplayUI.instance.ChangeBasketScore(basket_count);
             }
-            //transform.parent=collision.gameObject.transform.parent;
-            //collision.gameObject.transform.parent = transform;
-
         }
         else {
             Debug.Log("collision2" + collision.name);
@@ -130,10 +90,6 @@ public class BallManager : MonoBehaviour
         start.z = end.z = 0;
         Quaternion rotation = new Quaternion();
         rotation = Quaternion.FromToRotation(start,end);
-        //rotation.eulerAngles=new Vector3((end - start).x, (end - start).y, 0);
-        //rotation.eulerAngles = new Vector3(0, 0, 0);
-        //Debug.Log("rotation " + rotation.eulerAngles + " vector " + (end - start));
-        Debug.Log("rotation" + rotation.eulerAngles);
         current_basket.rotation*=rotation;
     }
     float Angle(Vector2 start,Vector2 end)
