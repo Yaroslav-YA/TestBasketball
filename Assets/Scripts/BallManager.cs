@@ -13,9 +13,9 @@ public class BallManager : MonoBehaviour
     Vector2 end;                        //position of touch at moment when ball drag
 
     public int power_multiplier = 100;  //strength multiplier of ball push
-    public int basket_count = 0;
+    public int basket_count = 0;        //basket score
     
-    public static bool is_in_basket;
+    public static bool is_in_basket;    
     Transform current_basket;
     //FixedJoint2D ball_fixed_joint;
     #endregion
@@ -77,6 +77,7 @@ public class BallManager : MonoBehaviour
                 basket_count++;
                 temp_catch.Catch();
                 GameplayUI.instance.ChangeBasketScore(basket_count);
+                LevelManager.instance.GenerateUpLevel();
             }
         }
         else {

@@ -7,10 +7,12 @@ public class CatchBall : MonoBehaviour
 {
     public bool is_counted=false;
     public SpriteShapeRenderer shape_renderer;
+    Color count_color=new Color(0,0,0);
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -22,7 +24,10 @@ public class CatchBall : MonoBehaviour
     public void Catch()
     {
         is_counted = true;
-        shape_renderer.color = new Color(0, 0, 0);
+        shape_renderer.color = count_color;
+        //GameplayUI.instance.IncreaseBasketScore();
+        //LevelManager.instance.DeleteBasket(this.gameObject.GetComponentInParent<Transform>());
+        //LevelManager.instance.GenerateUpLevel();
     }
 
     /*private void OnTriggerEnter2D(Collider2D collision)

@@ -27,4 +27,9 @@ public class GameplayUI : MonoBehaviour
     {
         basket_score.text = score.ToString();
     }
+
+    public void IncreaseBasketScore()
+    {
+        basket_score.text += 1;
+    }
 }
