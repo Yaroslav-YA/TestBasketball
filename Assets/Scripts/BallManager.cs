@@ -15,14 +15,20 @@ public class BallManager : MonoBehaviour
     public int power_multiplier = 100;  //strength multiplier of ball push
     public int basket_count = 0;        //basket score
     
-    public static bool is_in_basket;    
+    public static bool is_in_basket;
+    
     Transform current_basket;
+
+    bool is_reset = false;
+
+    string roof_tag = "roof";
     //FixedJoint2D ball_fixed_joint;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         ball = GetComponent<Rigidbody2D>();
+        LoopManager.instance.AddResetObject(this.transform);
     }
 
     // Update is called once per frame
@@ -64,6 +70,11 @@ public class BallManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == roof_tag)
+        {
+            is_reset = true;
+            return;
+        }
         if (!is_in_basket)
         {
             //Debug.Log("collision" + collision.name);
@@ -72,6 +83,11 @@ public class BallManager : MonoBehaviour
             is_in_basket = true;
             current_basket = collision.gameObject.transform.parent.transform;
             CatchBall temp_catch = collision.gameObject.GetComponent<CatchBall>();
+            if (is_reset)
+            {
+                is_reset = false;
+                LoopManager.instance.ResetPosition();
+            }
             if (!temp_catch.is_counted)
             {
                 basket_count++;

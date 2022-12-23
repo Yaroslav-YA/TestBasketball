@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
             {
                 basket_pool[i].transform.position = position;
                 basket_pool[i].SetActive(true);
+                LoopManager.instance.AddResetObject(basket_pool[i].transform);
                 break;
             }
         }
