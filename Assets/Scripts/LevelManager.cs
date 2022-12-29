@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -66,5 +67,11 @@ public class LevelManager : MonoBehaviour
         Vector2 temp_position = Random.insideUnitCircle * basket_distance;
         temp_position.y = Mathf.Abs(temp_position.y);
         AddBasket(temp_position);
+    }
+
+    public void ResetLevel()
+    {
+        //GameplayUI.instance.ChangeBasketScore(0);
+        SceneManager.LoadSceneAsync( SceneManager.GetActiveScene().buildIndex);
     }
 }

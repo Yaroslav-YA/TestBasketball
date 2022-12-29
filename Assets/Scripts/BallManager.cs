@@ -13,7 +13,7 @@ public class BallManager : MonoBehaviour
     Vector2 end;                        //position of touch at moment when ball drag
 
     public int power_multiplier = 100;  //strength multiplier of ball push
-    public int basket_count = 0;        //basket score
+    //public int basket_count = 0;        //basket score
     
     public static bool is_in_basket;
     
@@ -90,9 +90,10 @@ public class BallManager : MonoBehaviour
             }
             if (!temp_catch.is_counted)
             {
-                basket_count++;
+                //basket_count++;
                 temp_catch.Catch();
-                GameplayUI.instance.ChangeBasketScore(basket_count);
+                //GameplayUI.instance.ChangeBasketScore(basket_count);
+                GameplayUI.instance.IncreaseBasketScore();
                 LevelManager.instance.GenerateUpLevel();
             }
         }

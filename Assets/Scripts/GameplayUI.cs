@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {
-    public Text basket_score;
-    public Text star_score;
+    public Text basket_score_text;
+    public Text star_score_text;
+    private int basket_score = 0;
+    private int star_score = 0;
     public static GameplayUI instance;
     // Start is called before the first frame update
     void Start()
     {
-        basket_score.text = "0";
+        basket_score_text.text = "0";
         if (instance == null)
         {
             instance = this;
@@ -25,11 +27,12 @@ public class GameplayUI : MonoBehaviour
     }
     public void ChangeBasketScore(int score)
     {
-        basket_score.text = score.ToString();
+        basket_score_text.text = score.ToString();
     }
 
     public void IncreaseBasketScore()
     {
-        basket_score.text += 1;
+        basket_score++;
+        ChangeBasketScore(basket_score);
     }
 }
