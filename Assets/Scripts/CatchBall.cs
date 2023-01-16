@@ -30,6 +30,10 @@ public class CatchBall : MonoBehaviour
         //LevelManager.instance.GenerateUpLevel();
     }
 
+    private void OnBecameInvisible()
+    {
+        LevelManager.instance.DeleteBasket(this.gameObject.GetComponentInParent<Transform>());
+    }
     /*private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("collision"+collision.name);

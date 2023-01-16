@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - roof
+  - floor
   layers:
   - Default
   - TransparentFX

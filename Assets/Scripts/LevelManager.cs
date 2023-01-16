@@ -69,9 +69,9 @@ public class LevelManager : MonoBehaviour
         AddBasket(temp_position);
     }
 
-    public void ResetLevel()
+    public static void ResetLevel()
     {
         //GameplayUI.instance.ChangeBasketScore(0);
-        SceneManager.LoadSceneAsync( SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex);
     }
 }

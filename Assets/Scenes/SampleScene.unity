@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 692703547}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 1712275360}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1112,7 +1112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712275354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.87, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1208,8 +1208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0284a6d674167d41bf19005a212fada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basket_score: {fileID: 1223802101}
-  star_score: {fileID: 47426623}
+  basket_score_text: {fileID: 1223802101}
+  star_score_text: {fileID: 47426623}
 --- !u!114 &1770063877
 MonoBehaviour:
   m_ObjectHideFlags: 0

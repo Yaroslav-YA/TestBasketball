@@ -18,6 +18,8 @@ public class Floor : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		//BallManager.ResetLevel
+        if (collision.CompareTag("Player")) { 
+            LevelManager.ResetLevel();
+        }
 	}
 }

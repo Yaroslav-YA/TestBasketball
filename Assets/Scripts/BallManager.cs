@@ -62,20 +62,27 @@ public class BallManager : MonoBehaviour
     /// </summary>
     void Push()
     {
-        end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        ball.simulated = true;
-        ball.AddForce((end - start) * -power_multiplier);
-        is_drag = false;
+        if (is_in_basket) {
+            end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            ball.simulated = true;
+            ball.AddForce((end - start) * -power_multiplier);
+            is_drag = false; 
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*if (collision.CompareTag("floor"))
+        {
+            return;
+        }*/
         if (collision.tag == roof_tag)
         {
             is_reset = true;
             return;
         }
-        if (!is_in_basket)
+        if (!is_in_basket&&!collision.CompareTag("floor"))
         {
             //Debug.Log("collision" + collision.name);
             ball.transform.position = collision.transform.position;
